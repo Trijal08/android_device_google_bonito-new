@@ -25,7 +25,7 @@ include device/google/bonito/device-audio-mfg.mk
 include device/google/bonito/device.mk
 
 #Ship GCam
-$(call inherit-product, vendor/google/GoogleCamera/config.mk)
+$(call inherit-product, vendor/google/GoogleCamera/b4s4/config.mk)
 
 # Bug 77867216
 PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=3
