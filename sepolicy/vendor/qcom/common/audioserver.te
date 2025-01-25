@@ -2,3 +2,6 @@ binder_call(audioserver, bootanim)
 
 allow audioserver sysfs_soc:file r_file_perms;
 allow audioserver sysfs_soc:dir search;
+
+allow audioserver unlabeled:file { read write open getattr };
+allow hal_audio_default hal_audio_default:process { execmem };
