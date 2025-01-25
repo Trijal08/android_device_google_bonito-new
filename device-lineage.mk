@@ -19,6 +19,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.vendor.camera.extensions.package=com.google.android.apps.camera.services \
     ro.vendor.camera.extensions.service=com.google.android.apps.camera.services.extensions.service.PixelExtensions
 
+# DeviceAsWebcam
+TARGET_BUILD_DEVICE_AS_WEBCAM := true
+
 # Elmyra
 PRODUCT_PACKAGES += \
     ElmyraService
@@ -35,6 +38,9 @@ endif
 # Google Assistant
 PRODUCT_PRODUCT_PROPERTIES += ro.opa.eligible_device=true
 
+# Google Pixel Face Unlock
+$(call inherit-product-if-exists, vendor/google/faceunlock/config.mk)
+
 # Lineage Health
 include hardware/google/pixel/lineage_health/device.mk
 
@@ -45,6 +51,16 @@ PRODUCT_PACKAGES += \
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
+
+# Pixel Parts
+$(call inherit-product-if-exists, packages/apps/PixelParts/device.mk)
+
+# Private signing keys
+-include vendor/lineage-priv/keys/keys.mk
+
+# Quick Tap Stronger Taps
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.columbus.use_ap_sensor=false
 
 # RCS
 PRODUCT_PACKAGES += \
@@ -80,3 +96,10 @@ PRODUCT_PACKAGES += \
 
 # Properties
 TARGET_VENDOR_PROP := $(LOCAL_PATH)/vendor.prop
+
+## Extras/Add-ons
+# ViPER4AndroidFX
+$(call inherit-product-if-exists, packages/apps/ViPER4AndroidFX/config.mk)
+
+# Basic Call Recorder (BCR)
+$(call inherit-product-if-exists, vendor/bcr/bcr.mk)
